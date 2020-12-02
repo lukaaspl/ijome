@@ -1,0 +1,14 @@
+@mixin accessible-button($duration: 200ms, $bg-color: #f1f1f1) {
+  transition: background $duration ease;
+  cursor: pointer;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    background-color: $bg-color;
+  }
+
+  &:active {
+    background-color: darken($bg-color, 4%);
+  }
+}
