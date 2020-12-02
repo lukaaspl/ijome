@@ -1,22 +1,9 @@
+import { DEFAULT_FAV_EMOJIS } from "consts";
 import { PreviewEmoji } from "domains";
 import { AnimationControls, useAnimation } from "framer-motion";
 import { emojify, unemojify } from "node-emoji";
 import { isValidElement, useCallback } from "react";
 import { toArray } from "react-emoji-render";
-
-const DEFAULT_FAV_EMOJIS = [
-  ":smiley:",
-  ":wink:",
-  ":smile:",
-  ":stuck_out_tongue:",
-  ":confused:",
-  ":unamused:",
-  ":cat:",
-  ":thumbsup:",
-  ":thumbsdown:",
-  ":shrug:",
-  ":heart:",
-];
 
 export const toEmojiString = (value: string): string => {
   return toArray(value)

@@ -1,6 +1,7 @@
 import Editor from "components/Editor";
 import FavEmojis from "components/FavEmojis";
 import Preview from "components/Preview";
+import { LSKey } from "consts";
 import { PreviewEmoji } from "domains";
 import { motion } from "framer-motion";
 import { emojify } from "node-emoji";
@@ -8,18 +9,16 @@ import React, { useCallback, useEffect, useRef } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { getDefaultFavEmojis, useTitleAnimation } from "utils";
 
-const FAV_EMOJIS_LS_KEY = "FAV_EMOJIS";
-const EDITOR_CONTENT_LS_KEY = "EDITOR_CONTENT";
-const DEFAULT_TEXT = "Enter y:o:ur text here...";
+const DEFAULT_EDITOR_CONTENT = "Enter y:o:ur text here...";
 
 const App: React.FC = () => {
   const [rawText, setRawText] = useLocalStorageState(
-    EDITOR_CONTENT_LS_KEY,
-    DEFAULT_TEXT
+    LSKey.EditorContent,
+    DEFAULT_EDITOR_CONTENT
   );
 
   const [favEmojis, setFavEmojis] = useLocalStorageState<PreviewEmoji[]>(
-    FAV_EMOJIS_LS_KEY,
+    LSKey.FavEmojis,
     getDefaultFavEmojis()
   );
 
