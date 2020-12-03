@@ -9,7 +9,7 @@ https://ijome.netlify.app/
 Clone repository
 
 ```
-git clone https://github.com/lukaaspl/ijome
+git clone https://github.com/lukaaspl/ijome.git
 ```
 
 Install dependencies
