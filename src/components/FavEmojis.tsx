@@ -1,5 +1,7 @@
 import Tippy, { useSingleton } from "@tippyjs/react";
+import { commonVariants } from "consts";
 import { PreviewEmoji } from "domains";
+import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 
 interface FavEmojisProps {
@@ -29,31 +31,41 @@ const FavEmojis: React.FC<FavEmojisProps> = ({
           duration={200}
           delay={[600, 0]}
         />
-        {emojis.map((emoji) => {
-          const tooltipContent = (
-            <div className="favs__emoji-tooltip">
-              <h4 className="favs__emoji-tooltip-title">{emoji.text}</h4>
-              <span className="favs__emoji-tooltip-details">
-                <b>LMB</b> - append
-              </span>
-              <span className="favs__emoji-tooltip-details">
-                <b>RMB</b> - remove
-              </span>
-            </div>
-          );
+        <AnimatePresence initial={false}>
+          {emojis.map((emoji) => {
+            const tooltipContent = (
+              <div className="favs__emoji-tooltip">
+                <h4 className="favs__emoji-tooltip-title">{emoji.text}</h4>
+                <span className="favs__emoji-tooltip-details">
+                  <b>LMB</b> - append
+                </span>
+                <span className="favs__emoji-tooltip-details">
+                  <b>RMB</b> - remove
+                </span>
+              </div>
+            );
 
-          return (
-            <Tippy key={emoji.text} singleton={target} content={tooltipContent}>
-              <button
-                className="favs__button"
-                onClick={() => onEmojiClick(emoji)}
-                onContextMenu={(event) => onEmojiRightClick(event, emoji)}
+            return (
+              <Tippy
+                key={emoji.text}
+                singleton={target}
+                content={tooltipContent}
               >
-                <span className="favs__emoji">{emoji.emoji}</span>
-              </button>
-            </Tippy>
-          );
-        })}
+                <motion.button
+                  variants={commonVariants}
+                  initial="enter"
+                  animate="visible"
+                  exit="leave"
+                  className="favs__button"
+                  onClick={() => onEmojiClick(emoji)}
+                  onContextMenu={(event) => onEmojiRightClick(event, emoji)}
+                >
+                  <span className="favs__emoji">{emoji.emoji}</span>
+                </motion.button>
+              </Tippy>
+            );
+          })}
+        </AnimatePresence>
       </div>
     </div>
   );
